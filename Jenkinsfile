@@ -30,6 +30,6 @@ node {
     }
 
     stage('SonarQube Analysis code') {
-          bat "./mvnw clean verify sonar:sonar"
+          bat "./mvnw clean verify sonar:sonar- Dmaven.test.skip=true"
       }
 }
