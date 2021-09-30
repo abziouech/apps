@@ -29,4 +29,10 @@ node {
         bat "./mvnw -ntp verify -P-webapp -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
+        stage('SonarQube Analysis') {
+        def mvn = tool 'Default Maven';
+        withSonarQubeEnv() {
+          bat "${mvn}/bin/mvn clean verify sonar:sonar"
+        }
+      }
 }
