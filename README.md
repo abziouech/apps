@@ -148,7 +148,7 @@ For more information, refer to the [Running tests page][].
 
 ### Code quality
 
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
+Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9007) with:
 
 ```
 docker-compose -f src/main/docker/sonar.yml up -d
