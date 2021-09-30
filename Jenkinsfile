@@ -29,7 +29,7 @@ node {
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
 
-    stage('SonarQube Analysis') {
+    stage('SonarQube Analyis code') {
           bat "./mvnw clean verify sonar:sonar"
         }
       }
