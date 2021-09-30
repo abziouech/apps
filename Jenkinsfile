@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 
 node {
+    def app
     stage('checkout') {
         checkout scm
     }
@@ -31,5 +32,21 @@ node {
 
     stage('SonarQube Analysis code') {
           bat "./mvnw clean verify sonar:sonar -Dmaven.test.skip=true"
+    }
+    stage('Build image') {
+          app = docker.build("brandonjones085/test")
+     }
+
+      stage('Test image') {
+         app.inside {
+             bat 'echo "Tests passed"'
+          }
       }
+
+      stage('Push image') {
+           docker.withRegistry('https://registry.hub.docker.com', 'git') {
+             app.push("${env.BUILD_NUMBER}")
+             app.push("latest")
+          }
+        }
 }
