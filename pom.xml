@@ -89,7 +89,7 @@
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
         <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.0.2155</sonar-maven-plugin.version>
-        <!-- jhipster-needle-maven-property -->
+        <sonar.projectKey>apps</sonar.projectKey>
     </properties>
 
     <dependencyManagement>
