@@ -31,6 +31,5 @@ node {
 
     stage('SonarQube Analysis code') {
           bat "./mvnw clean verify sonar:sonar"
-        }
       }
 }
