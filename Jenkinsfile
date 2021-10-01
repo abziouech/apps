@@ -33,20 +33,28 @@ node {
     stage('SonarQube Analysis code') {
           bat "./mvnw clean verify sonar:sonar -Dmaven.test.skip=true"
     }
-    stage('Build image') {
-          app = docker.build("brandonjones085/test")
-     }
 
-      stage('Test image') {
-         app.inside {
-             bat 'echo "Tests passed"'
-          }
-      }
+    stage('Building our image') {
+            steps {
+                script {
+                    dockerImage = docker.build "abziouech/myrepo" + ":$BUILD_NUMBER"
+                }
+            }
+    }
 
-      stage('Push image') {
-           docker.withRegistry('https://registry.hub.docker.com', 'git') {
-             app.push("${env.BUILD_NUMBER}")
-             app.push("latest")
+    stage('Deploy our image') {
+            steps {
+                script {
+                    docker.withRegistry( '', 'abziouech' ) {
+                        dockerImage.push()
+                    }
+                }
+
           }
-        }
+    }
+
 }
+
+
+
+
